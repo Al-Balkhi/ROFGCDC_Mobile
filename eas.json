@@ -1,0 +1,29 @@
+{
+  "build": {
+    "development": {
+      "developmentClient": true,
+      "distribution": "internal",
+      "env": {
+        "APP_TYPE": "citizen"
+      }
+    },
+    "driver-development": {
+      "developmentClient": true,
+      "distribution": "internal",
+      "env": {
+        "APP_TYPE": "driver"
+      }
+    },
+    "production": {
+      "env": {
+        "APP_TYPE": "citizen"
+      }
+    },
+    "driver-production": {
+      "env": {
+        "APP_TYPE": "driver"
+      }
+    }
+  }
+}
+
