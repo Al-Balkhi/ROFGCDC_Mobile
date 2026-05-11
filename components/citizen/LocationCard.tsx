@@ -9,14 +9,16 @@
  *   - Loading: Button text changes to "Locating..." and is disabled.
  */
 
+import * as Location from "expo-location";
 import React from "react";
 import { Text, TouchableOpacity, View } from "react-native";
-import * as Location from "expo-location";
 import { STRINGS } from "../../constants/strings";
 
 interface LocationCardProps {
   /** The currently resolved GPS position, or null if empty. */
   location: Location.LocationObject | null;
+  /** Human-readable location name (city/region), or null if not resolved. */
+  locationName: string | null;
   /** True while a GPS fetch is in flight. */
   loading: boolean;
   /** Triggered when the user taps the Get Location button. */
@@ -30,6 +32,7 @@ interface LocationCardProps {
  */
 export function LocationCard({
   location,
+  locationName,
   loading,
   onGetLocation,
 }: LocationCardProps) {
@@ -51,10 +54,13 @@ export function LocationCard({
             <Text className="text-success font-bold mb-1 text-right">
               {STRINGS.LABEL_LOCATION_SET}
             </Text>
-            {/* Show coordinates truncated to 5 decimals (~1.1 meter accuracy) */}
-            <Text className="text-xs text-gray-500 text-right">
-              {location.coords.latitude.toFixed(5)},{" "}
-              {location.coords.longitude.toFixed(5)}
+            {/* Show location name (city/region) instead of coordinates */}
+            <Text
+              className="text-xs text-gray-500 text-right"
+              numberOfLines={1}
+            >
+              {locationName ||
+                `${location.coords.latitude.toFixed(5)}, ${location.coords.longitude.toFixed(5)}`}
             </Text>
           </View>
         ) : (

@@ -1,3 +1,4 @@
+import Constants from 'expo-constants';
 /**
  * constants/api.ts
  *
@@ -9,9 +10,12 @@
  * making misconfiguration obvious rather than silently sending data to a dev machine.
  */
 
+const debuggerHost = Constants.expoConfig?.hostUri;
+const dynamicLocalIp = debuggerHost ? debuggerHost.split(':')[0] : '127.0.0.1';
+
 /** Base URL for the backend REST API. */
 export const API_URL =
-  process.env.EXPO_PUBLIC_API_URL ?? "http://localhost:8000/api";
+  process.env.EXPO_PUBLIC_API_URL ?? `http://${dynamicLocalIp}:8000/api`;
 
 /** Maximum number of photos allowed per citizen report. */
 export const MAX_PHOTOS = 3;

@@ -24,9 +24,14 @@ import { useReportForm } from "../../../hooks/useReportForm";
  * All UI logic is delegated to feature-specific sub-components.
  */
 export default function CitizenReportScreen() {
-  const deviceId                                      = useDeviceId();
-  const { location, loading: locating, getLocation } = useLocation();
-  const form                                          = useReportForm();
+  const deviceId = useDeviceId();
+  const {
+    location,
+    locationName,
+    loading: locating,
+    getLocation,
+  } = useLocation();
+  const form = useReportForm();
 
   // Request location permission eagerly so the GPS prompt appears upfront.
   // The side-effect is kept outside of the hook so the hook itself remains pure.
@@ -62,14 +67,12 @@ export default function CitizenReportScreen() {
 
       <LocationCard
         location={location}
+        locationName={locationName}
         loading={locating}
         onGetLocation={getLocation}
       />
 
-      <IssueTypePicker
-        selected={form.issueType}
-        onSelect={form.setIssueType}
-      />
+      <IssueTypePicker selected={form.issueType} onSelect={form.setIssueType} />
 
       <DescriptionInput
         value={form.description}

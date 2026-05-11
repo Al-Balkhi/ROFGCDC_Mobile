@@ -80,6 +80,12 @@ export default function ({ config }) {
           },
         },
       ],
+      [
+        "expo-location",
+        {
+          "locationAlwaysAndWhenInUsePermission": "Allow ROFGCDC to track collection tasks and routing correctly from your device."
+        }
+      ],
     ],
 
     experiments: {
